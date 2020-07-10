@@ -2,3 +2,157 @@
   [1m[35m (350.0ms)[0m  [1m[35mCREATE DATABASE "moodring_app_api_test" ENCODING = 'unicode'[0m
   [1m[35m (3.5ms)[0m  [1m[35mCREATE DATABASE "moodring_app_api_development" ENCODING = 'unicode'[0m
   [1m[35m (1.8ms)[0m  [1m[35mCREATE DATABASE "moodring_app_api_test" ENCODING = 'unicode'[0m
+  [1m[35m (33.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (5.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(412755327871299315)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateSongs (20200710153320)
+  [1m[35m (9.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE TABLE "songs" ("id" bigserial primary key, "title" character varying, "mood" character varying, "img" character varying, "audio" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200710153320"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateMoodLists (20200710153409)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE TABLE "mood_lists" ("id" bigserial primary key, "title" character varying, "mood" character varying, "img" character varying, "audio" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200710153409"]]
+  [1m[35m (6.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddColumnToSongs (20200710160137)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "songs" ADD "artist" character varying[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200710160137"]]
+  [1m[35m (16.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-07-10 16:03:03.740435"], ["updated_at", "2020-07-10 16:03:03.740435"]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(412755327871299315)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(412755327871299315)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddColumnToMoods (20200710160630)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.5ms)[0m  [1m[35mALTER TABLE "moods" ADD "artist" character varying[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(412755327871299315)[0m
+  [1m[35m (16.7ms)[0m  [1m[34mSELECT pg_try_advisory_lock(412755327871299315)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddColumnToMoods (20200710160630)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "mood" ADD "artist" character varying[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(412755327871299315)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(412755327871299315)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddColumnToMoods (20200710160630)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "mood_list" ADD "artist" character varying[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(412755327871299315)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(412755327871299315)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddColumnToMoods (20200710160630)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "mood_lists" ADD "artist" character varying[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200710160630"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(412755327871299315)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (16.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSong Create (2.6ms)[0m  [1m[32mINSERT INTO "songs" ("title", "mood", "img", "audio", "created_at", "updated_at", "artist") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Tunnels and Planes"], ["mood", "Chill"], ["img", "https://www.wyved.com/wp-content/uploads/2015/02/artworks-000105713115-azcg49-t500x500.jpg"], ["audio", ""], ["created_at", "2020-07-10 17:52:28.701025"], ["updated_at", "2020-07-10 17:52:28.701025"], ["artist", "Nick Leng"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSong Create (0.2ms)[0m  [1m[32mINSERT INTO "songs" ("title", "mood", "img", "audio", "created_at", "updated_at", "artist") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Skin and Bone"], ["mood", "Chill"], ["img", "https://f4.bcbits.com/img/a3882157971_10.jpg"], ["audio", ""], ["created_at", "2020-07-10 17:52:28.725163"], ["updated_at", "2020-07-10 17:52:28.725163"], ["artist", "Tom Day, Monsoonsiren"]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSong Create (0.2ms)[0m  [1m[32mINSERT INTO "songs" ("title", "mood", "img", "audio", "created_at", "updated_at", "artist") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Control"], ["mood", "Chill"], ["img", "https://i1.sndcdn.com/artworks-000106237614-85bout-t500x500.jpg"], ["audio", ""], ["created_at", "2020-07-10 17:52:28.728458"], ["updated_at", "2020-07-10 17:52:28.728458"], ["artist", "Kevin Garrett"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSong Create (0.2ms)[0m  [1m[32mINSERT INTO "songs" ("title", "mood", "img", "audio", "created_at", "updated_at", "artist") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Swordfighter"], ["mood", "Chill"], ["img", "https://f4.bcbits.com/img/a2817125523_10.jpg"], ["audio", ""], ["created_at", "2020-07-10 17:52:28.731795"], ["updated_at", "2020-07-10 17:52:28.731795"], ["artist", "Andrew Applepie, Dario Lessing"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSong Create (0.2ms)[0m  [1m[32mINSERT INTO "songs" ("title", "mood", "img", "audio", "created_at", "updated_at", "artist") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Eden Transit"], ["mood", "Sleepy-Time"], ["img", "https://i.ytimg.com/vi/BN-2Bco-Id4/maxresdefault.jpg"], ["audio", ""], ["created_at", "2020-07-10 17:52:28.735083"], ["updated_at", "2020-07-10 17:52:28.735083"], ["artist", "Catsystem Corp."]]
+  [1m[35m (16.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSong Create (0.2ms)[0m  [1m[32mINSERT INTO "songs" ("title", "mood", "img", "audio", "created_at", "updated_at", "artist") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Dream 3 (In the midst of my life)"], ["mood", "Sleepy-Time"], ["img", "https://lh3.googleusercontent.com/proxy/04iycwu_QFOnpX-nBdA_uoC_OwsmZvq2L7COJONTutXOD6RB08JFNBBD4vhf6TVkut-i1IxUWlc2fhhygtY9bXA_xvKlT8VhYupkrIAQ3B4qrkGx7b8"], ["audio", ""], ["created_at", "2020-07-10 17:52:28.768892"], ["updated_at", "2020-07-10 17:52:28.768892"], ["artist", "Max Richter, Ben Russell, Yuki Numata Resnick"]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSong Create (0.2ms)[0m  [1m[32mINSERT INTO "songs" ("title", "mood", "img", "audio", "created_at", "updated_at", "artist") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Divine"], ["mood", "Sleepy-Time"], ["img", "https://lastfm.freetls.fastly.net/i/u/500x500/e080e46d33c77e588d8996704653917c.jpg"], ["audio", ""], ["created_at", "2020-07-10 17:52:28.771818"], ["updated_at", "2020-07-10 17:52:28.771818"], ["artist", "Tejal Yann"]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSong Create (0.2ms)[0m  [1m[32mINSERT INTO "songs" ("title", "mood", "img", "audio", "created_at", "updated_at", "artist") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Time Travel"], ["mood", "Sleepy-Time"], ["img", "https://m.media-amazon.com/images/I/71g6BLIPklL._SS500_.jpg"], ["audio", ""], ["created_at", "2020-07-10 17:52:28.774454"], ["updated_at", "2020-07-10 17:52:28.774454"], ["artist", "Antologie"]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSong Create (0.6ms)[0m  [1m[32mINSERT INTO "songs" ("title", "mood", "img", "audio", "created_at", "updated_at", "artist") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Shakushain"], ["mood", "Pumped"], ["img", "https://m.media-amazon.com/images/I/91wcEjAymDL._SS500_.jpg"], ["audio", ""], ["created_at", "2020-07-10 17:52:28.777086"], ["updated_at", "2020-07-10 17:52:28.777086"], ["artist", "WEDNESDAY CAMPANELLA"]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSong Create (0.1ms)[0m  [1m[32mINSERT INTO "songs" ("title", "mood", "img", "audio", "created_at", "updated_at", "artist") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Monument - The Inevitable End Version"], ["mood", "Pumped"], ["img", "https://static.stereogum.com/uploads/2014/09/artworks-000090394689-rncqud-t500x500-608x608.jpg"], ["audio", ""], ["created_at", "2020-07-10 17:52:28.780075"], ["updated_at", "2020-07-10 17:52:28.780075"], ["artist", "Royksopp, Robyn"]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSong Create (0.1ms)[0m  [1m[32mINSERT INTO "songs" ("title", "mood", "img", "audio", "created_at", "updated_at", "artist") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Magenta Riddim"], ["mood", "Pumped"], ["img", "https://i1.sndcdn.com/artworks-000312418050-sh8bh0-t500x500.jpg"], ["audio", ""], ["created_at", "2020-07-10 17:52:28.782507"], ["updated_at", "2020-07-10 17:52:28.782507"], ["artist", "DJ Snake"]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSong Create (0.2ms)[0m  [1m[32mINSERT INTO "songs" ("title", "mood", "img", "audio", "created_at", "updated_at", "artist") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "ENERGY - Edit"], ["mood", "Pumped"], ["img", "https://m.media-amazon.com/images/I/91fMgMdR5dL._SS500_.jpg"], ["audio", ""], ["created_at", "2020-07-10 17:52:28.784997"], ["updated_at", "2020-07-10 17:52:28.784997"], ["artist", "Disclosure"]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSong Create (0.2ms)[0m  [1m[32mINSERT INTO "songs" ("title", "mood", "img", "audio", "created_at", "updated_at", "artist") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Anything for You"], ["mood", "Resplendant"], ["img", "https://i1.sndcdn.com/artworks-000264256088-n28qbj-t500x500.jpg"], ["audio", ""], ["created_at", "2020-07-10 17:52:28.787547"], ["updated_at", "2020-07-10 17:52:28.787547"], ["artist", "barnacle boi"]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSong Create (0.1ms)[0m  [1m[32mINSERT INTO "songs" ("title", "mood", "img", "audio", "created_at", "updated_at", "artist") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Sparkly"], ["mood", "Resplendant"], ["img", "https://xlr8r.com/wp-content/uploads/2019/06/youngmagic012512.jpg"], ["audio", ""], ["created_at", "2020-07-10 17:52:28.790021"], ["updated_at", "2020-07-10 17:52:28.790021"], ["artist", "Young Magic"]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSong Create (0.1ms)[0m  [1m[32mINSERT INTO "songs" ("title", "mood", "img", "audio", "created_at", "updated_at", "artist") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Butterflies"], ["mood", "Resplendant"], ["img", "https://bucket.mn2s.com/wp-content/uploads/2018/10/13144927/Dardust-MN2S.png"], ["audio", ""], ["created_at", "2020-07-10 17:52:28.792479"], ["updated_at", "2020-07-10 17:52:28.792479"], ["artist", "Dardust"]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSong Create (0.1ms)[0m  [1m[32mINSERT INTO "songs" ("title", "mood", "img", "audio", "created_at", "updated_at", "artist") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Latch"], ["mood", "Resplendant"], ["img", "https://i1.sndcdn.com/artworks-000100648138-qfqyq0-t500x500.jpg"], ["audio", ""], ["created_at", "2020-07-10 17:52:28.794986"], ["updated_at", "2020-07-10 17:52:28.794986"], ["artist", "Disclosure"]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/" for ::1 at 2020-07-10 13:56:35 -0400
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Library/Ruby/Gems/2.6.0/gems/railties-6.0.3.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Library/Ruby/Gems/2.6.0/gems/railties-6.0.3.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 8.3ms | Allocations: 478)
+Completed 200 OK in 19ms (Views: 13.7ms | ActiveRecord: 0.0ms | Allocations: 2621)
+
+
+Started GET "/songs" for ::1 at 2020-07-10 13:56:44 -0400
+Processing by SongsController#index as HTML
+  [1m[36mSong Load (0.9ms)[0m  [1m[34mSELECT "songs".* FROM "songs"[0m
+  ↳ app/controllers/songs_controller.rb:8:in `index'
+Completed 200 OK in 17ms (Views: 10.4ms | ActiveRecord: 4.2ms | Allocations: 9563)
+
+
+Started GET "/moods" for ::1 at 2020-07-10 13:57:07 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/moods"):
+  
+actionpack (6.0.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3.2) lib/rails/engine.rb:527:in `call'
+puma (4.3.5) lib/puma/configuration.rb:228:in `call'
+puma (4.3.5) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.5) lib/puma/server.rb:472:in `process_client'
+puma (4.3.5) lib/puma/server.rb:328:in `block in run'
+puma (4.3.5) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/songs" for ::1 at 2020-07-10 13:57:17 -0400
+Processing by SongsController#index as HTML
+  [1m[36mSong Load (0.2ms)[0m  [1m[34mSELECT "songs".* FROM "songs"[0m
+  ↳ app/controllers/songs_controller.rb:8:in `index'
+Completed 200 OK in 3ms (Views: 2.8ms | ActiveRecord: 0.2ms | Allocations: 3483)
+
+
+  [1m[36mSong Load (0.3ms)[0m  [1m[34mSELECT "songs".* FROM "songs" WHERE "songs"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]

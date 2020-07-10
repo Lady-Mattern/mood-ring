@@ -1,0 +1,2 @@
+class MoodList < ApplicationRecord
+end
