@@ -1,3 +1,3 @@
 class MoodList < ApplicationRecord
-    has_many :songs
+    # has_many :songs
 end

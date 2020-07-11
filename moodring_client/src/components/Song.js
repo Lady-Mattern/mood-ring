@@ -6,19 +6,32 @@ class Song extends Component {
         songs: []
     }
 
-    componentDifMount() {
+    componentDidMount() {
         this.getSongs()
     }
 
     getSongs = () => {
         fetch('http://localhost:3000/songs')
         .then(response => response.json())
-        .then(json => console.log(json))
+        .then(json => this.setState({songs: json}))
         .catch(error => console.error(error))
     }
 
+    deleteSong = (id, index) => {
+        fetch(`http://localhost:3000/songs/${id}`, {
+            method: "DELETE"
+        }).then(song => {
+            this.setState({
+                songs: [
+                    ...this.state.songs.slice(0, index),
+                    ...this.state.songs.slice(index + 1)
+                ]
+            })
+        })
+    }
+
     render() {
-        console.log(this.state.notices);
+        // console.log(this.state.songs);
         return (
             <div>
                 <h1>Song List</h1>
@@ -26,11 +39,22 @@ class Song extends Component {
                 {this.state.songs.map( song => {
                     return (
                         <div key={song.id} className="song">
-                            {/* <img {song.img} /> */}
+                            <img src={song.img} alt={song.title} />
                             <h3>{song.title}</h3>
                             <h3>{song.artist}</h3>
+                            <button onClick={()=> this.deleteSong(song)}>Delete Song</button>
                         </div>
                     )
+                })}
+                {this.props.songs.map( song => {
+                    return (
+                        <div key={song.id} className="song">
+                            <img src={song.img} alt={song.title} />
+                            <h3>{song.title}</h3>
+                            <h3>{song.artist}</h3>
+                            <button onClick={()=> this.deleteSong(song)}>Delete Song</button>
+                        </div>
+                    )                    
                 })}
             </div>
         )

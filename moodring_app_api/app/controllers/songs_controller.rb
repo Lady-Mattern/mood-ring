@@ -3,7 +3,7 @@ class SongsController < ApplicationController
 
   # GET /songs
   def index
-    @songs = Song.all
+    @songs = Song.all.reverse
 
     render json: @songs
   end
@@ -46,6 +46,6 @@ class SongsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def song_params
-      params.require(:song).permit(:title, :mood, :img, :audio)
+      params.require(:song).permit(:title, :mood, :img, :artist, :audio)
     end
 end
