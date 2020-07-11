@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+// Deleted Song component to make sense of the routes
 // import Song from './components/Song.js';
+// UUID - Unique User ID. Makes it more like a mongo id key
+// inpm i uuidv4 to install this for future use
+import {uuid} from 'uuidv4';
 
 
 class App extends Component {
@@ -13,16 +17,16 @@ class App extends Component {
     }
   }
 
-    componentDidMount() {
-        this.getSongs()
-    }
+  componentDidMount = () => {
+      this.getSongs()
+  }
 
-    getSongs = () => {
-        fetch('http://localhost:3000/songs')
-        .then(response => response.json())
-        .then(json => this.setState({songs: json}))
-        .catch(error => console.error(error))
-    }
+  getSongs = () => {
+      fetch('http://localhost:3000/songs')
+      .then(response => response.json())
+      .then(json => this.setState({songs: json}))
+      .catch(error => console.error(error))
+  }
 
   handleChange = (event) => {
     const updateInput = Object.assign( this.state.formInputs, { [event.target.id]: event.target.value })
@@ -72,11 +76,9 @@ class App extends Component {
 
   render () {
     return (
-      <div className="App">
+      <div className="app">
         <header>
-          <nav>
-            <h1>Mood Ring</h1>
-          </nav>
+          <h1>Mood Ring</h1>
           <form onSubmit={this.handleSubmit}>
             <label htmlFor="title">Title: </label>
             <input 
@@ -110,13 +112,15 @@ class App extends Component {
           </form>
         </header>
         <main>
-          {this.state.songs.map(song => {
+          {this.state.songs.map((song, index) => {
             return(
-              <div key={song.id} className="song">
+              <div key={uuid()} className="song">
                 <img src={song.img} alt={song.title} />
                 <h3>{song.title}</h3>
-                <h3>{song.artist}</h3>
-                <button onClick={() => {this.deleteSong(song.id)}}>Delete Song</button>
+                <p>{song.artist}</p>
+                <p>{song.mood}</p>
+                <button onClick={() => {this.deleteSong(song.id, index)}}>Delete Song</button>
+                <hr />
               </div>
             )
           })}
