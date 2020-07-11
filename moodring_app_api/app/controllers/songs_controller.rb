@@ -26,16 +26,15 @@ class SongsController < ApplicationController
 
   # PATCH/PUT /songs/1
   def update
-    if @song.update(song_params)
-      render json: @song
-    else
-      render json: @song.errors, status: :unprocessable_entity
-    end
+    song = Song.find(params[:id])
+    song.update(song_params)
+    render(json: {song: song})
   end
 
   # DELETE /songs/1
   def destroy
-    @song.destroy
+    song = Song.destroy(params[:id])
+    render(status: 204)
   end
 
   private

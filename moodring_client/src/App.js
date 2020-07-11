@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Song from './components/Song.js';
+// import Song from './components/Song.js';
 
 
 class App extends Component {
@@ -12,6 +12,17 @@ class App extends Component {
       img: ''
     }
   }
+
+    componentDidMount() {
+        this.getSongs()
+    }
+
+    getSongs = () => {
+        fetch('http://localhost:3000/songs')
+        .then(response => response.json())
+        .then(json => this.setState({songs: json}))
+        .catch(error => console.error(error))
+    }
 
   handleChange = (event) => {
     const updateInput = Object.assign( this.state.formInputs, { [event.target.id]: event.target.value })
@@ -44,6 +55,19 @@ class App extends Component {
       })
     })
     .catch(error => console.log(error))
+  }
+
+  deleteSong = (id, index) => {
+    fetch(`http://localhost:3000/songs/${id}`, {
+        method: "DELETE"
+    }).then(song => {
+        this.setState({
+            songs: [
+                ...this.state.songs.slice(0, index),
+                ...this.state.songs.slice(index + 1)
+            ]
+        })
+    })
   }
 
   render () {
@@ -86,7 +110,16 @@ class App extends Component {
           </form>
         </header>
         <main>
-          <Song songs={this.state.songs} />
+          {this.state.songs.map(song => {
+            return(
+              <div key={song.id} className="song">
+                <img src={song.img} alt={song.title} />
+                <h3>{song.title}</h3>
+                <h3>{song.artist}</h3>
+                <button onClick={() => {this.deleteSong(song.id)}}>Delete Song</button>
+              </div>
+            )
+          })}
         </main>
       </div>
     )
