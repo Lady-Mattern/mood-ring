@@ -34470,3 +34470,62 @@ Processing by SongsController#index as */*
 Completed 200 OK in 3ms (Views: 1.9ms | ActiveRecord: 0.2ms | Allocations: 3289)
 
 
+Started GET "/songs" for ::1 at 2020-07-11 17:45:15 -0400
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SongsController#index as */*
+  [1m[36mSong Load (0.4ms)[0m  [1m[34mSELECT "songs".* FROM "songs"[0m
+  ↳ app/controllers/songs_controller.rb:6:in `index'
+Completed 200 OK in 14ms (Views: 1.9ms | ActiveRecord: 4.2ms | Allocations: 9389)
+
+
+Started POST "/songs" for ::1 at 2020-07-11 17:46:23 -0400
+Processing by SongsController#create as HTML
+  Parameters: {"title"=>"MySong", "artist"=>"A Guy", "mood"=>"Flustered", "img"=>"https://cdn3.bigcommerce.com/s-a6pgxdjc7w/products/1075/images/967/416130__50605.1467418920.1280.1280.jpg?c=2", "song"=>{"title"=>"MySong", "mood"=>"Flustered", "img"=>"https://cdn3.bigcommerce.com/s-a6pgxdjc7w/products/1075/images/967/416130__50605.1467418920.1280.1280.jpg?c=2", "artist"=>"A Guy"}}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/songs_controller.rb:20:in `create'
+  [1m[36mSong Create (0.9ms)[0m  [1m[32mINSERT INTO "songs" ("title", "mood", "img", "created_at", "updated_at", "artist") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "MySong"], ["mood", "Flustered"], ["img", "https://cdn3.bigcommerce.com/s-a6pgxdjc7w/products/1075/images/967/416130__50605.1467418920.1280.1280.jpg?c=2"], ["created_at", "2020-07-11 21:46:23.841759"], ["updated_at", "2020-07-11 21:46:23.841759"], ["artist", "A Guy"]]
+  ↳ app/controllers/songs_controller.rb:20:in `create'
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/songs_controller.rb:20:in `create'
+Completed 201 Created in 5ms (Views: 0.6ms | ActiveRecord: 1.2ms | Allocations: 2906)
+
+
+Started DELETE "/songs/26" for ::1 at 2020-07-11 17:46:28 -0400
+Processing by SongsController#destroy as */*
+  Parameters: {"id"=>"26"}
+  [1m[36mSong Load (0.2ms)[0m  [1m[34mSELECT "songs".* FROM "songs" WHERE "songs"."id" = $1 LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/songs_controller.rb:43:in `set_song'
+  [1m[36mCACHE Song Load (0.0ms)[0m  [1m[34mSELECT "songs".* FROM "songs" WHERE "songs"."id" = $1 LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ app/controllers/songs_controller.rb:36:in `destroy'
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/songs_controller.rb:36:in `destroy'
+  [1m[36mSong Destroy (0.2ms)[0m  [1m[31mDELETE FROM "songs" WHERE "songs"."id" = $1[0m  [["id", 26]]
+  ↳ app/controllers/songs_controller.rb:36:in `destroy'
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/songs_controller.rb:36:in `destroy'
+Completed 204 No Content in 11ms (Views: 0.1ms | ActiveRecord: 0.9ms | Allocations: 4601)
+
+
+Started PUT "/songs/1" for ::1 at 2020-07-11 17:47:01 -0400
+Processing by SongsController#update as */*
+  Parameters: {"song"=>{"title"=>"New Song Name"}, "id"=>"1"}
+  [1m[36mSong Load (0.2ms)[0m  [1m[34mSELECT "songs".* FROM "songs" WHERE "songs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/songs_controller.rb:43:in `set_song'
+  [1m[36mCACHE Song Load (0.0ms)[0m  [1m[34mSELECT "songs".* FROM "songs" WHERE "songs"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/songs_controller.rb:29:in `update'
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/songs_controller.rb:30:in `update'
+  [1m[36mSong Update (0.2ms)[0m  [1m[33mUPDATE "songs" SET "title" = $1, "updated_at" = $2 WHERE "songs"."id" = $3[0m  [["title", "New Song Name"], ["updated_at", "2020-07-11 21:47:01.802059"], ["id", 1]]
+  ↳ app/controllers/songs_controller.rb:30:in `update'
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/songs_controller.rb:30:in `update'
+Completed 200 OK in 4ms (Views: 0.2ms | ActiveRecord: 0.7ms | Allocations: 3662)
+
+
+Started GET "/songs" for ::1 at 2020-07-11 17:47:13 -0400
+Processing by SongsController#index as */*
+  [1m[36mSong Load (0.2ms)[0m  [1m[34mSELECT "songs".* FROM "songs"[0m
+  ↳ app/controllers/songs_controller.rb:6:in `index'
+Completed 200 OK in 17ms (Views: 15.5ms | ActiveRecord: 0.2ms | Allocations: 3291)
+
+
